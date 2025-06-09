@@ -6,24 +6,27 @@
 
 # Funciones
 
-def insertar(arbol, valor):
-    if arbol == []:
-        return [valor, [], []]
-    if valor < arbol[0]:
-        arbol[1] = insertar(arbol[1], valor)
-    elif valor > arbol[0]:
-        arbol[2] = insertar(arbol[2], valor)
-    return arbol
+# Insertar un nodo
+def insertar(arbol, valor): # Receibe un arbol y un valor para asignar a un nodo del arbol indicado
+    if arbol == []: # Comprueba si el arbol o lista anidada esta vacia
+        return [valor, [], []] # En caso de que la condición se cumpla, asigna el valor en la pos #0 y crea 2 listas anidadas
+    if valor < arbol[0]: # Verificación del valor con respecto al nodo padre
+        arbol[1] = insertar(arbol[1], valor) # Si es menor, se ubica en la lista anidada izquierda
+    elif valor > arbol[0]: # Nueva verificación si la condición anterior no se cumple. Ahora es mayor?
+        arbol[2] = insertar(arbol[2], valor) # Si es mayor, se coloca en la lista anidada derecha.
+    return arbol # Retorna un árbol de búsqueda binaria con los nuevos valores insertados.
 
+# Crear el árbol
 def crear_arbol():
-    arbol = []
-    continuar = 1
-    while continuar == 1:
-        valor = int(input("Ingrese un código: "))
-        if valor >= 0:
-            arbol = insertar(arbol, valor)
+    arbol = [] # Inicia el árbol como una lista vacia
+    continuar = 1 # Bandera para que el usuario controle el ingreso de inputs
+    while continuar == 1: # Condición del ciclo donde utilizamos la bandera
+        valor = input("Ingrese un código: ") # Registro del input del usuario
+        if valor.isdigit():
+            codigo = int(valor)
+            arbol = insertar(arbol, codigo)
         else:
-            print("No se permiten códigos negativos.")
+            print("No se permiten códigos negativos o letras, el sistema trabaja con inputs númericos")
         continuar = int(input("Desea ingresar otro código? (1. Si / 2. No): "))
     return arbol
 
@@ -133,34 +136,47 @@ operacion = int(input("Ingrese el número de la operación: "))
 
 while operacion != 5 and (operacion > 0 and operacion < 6):
     if operacion == 1:
-        codigo = int(input("Indique el código que esta buscando: "))
-        ruta = encontrar_ruta(arbol, codigo)
-        mostar_ruta(ruta)
-        print()
+        valor = input("Indique el código que esta buscando: ")
+        if valor.isdigit():
+            codigo = int(valor)
+            ruta = encontrar_ruta(arbol, codigo)
+            mostar_ruta(ruta)
+            print()
+        else:
+            print("El sistema sólo trabaja con inputs numericos positivos")
     elif operacion == 2:
-        codigo = int(input("Indique el código: "))
-        if codigo > 0:
-            insertar(arbol, codigo)
+        valor = input("Indique el código: ")
+        if valor.isdigit():
+            codigo = int(valor)
+            if codigo > 0:
+                insertar(arbol, codigo)
+                mostrar_arbol(arbol)
+        else:
+            print("El sistema sólo trabaja con inputs numericos positivos")
+    elif operacion == 3:
+        valor = input("Ingrese el código que desea modificar: ")
+        valor2 = input("Ingrese el nuevo código: ")
+        if valor.isdigit() and valor2.isdigit():
+            codigo = int(valor)
+            nuevoCodigo = int(valor2)
+            modificar_nodo(arbol, codigo, nuevoCodigo)
             mostrar_arbol(arbol)
         else:
-            print("No se permiten códigos negativos.")
-    elif operacion == 3:
-        codigo = int(input("Ingrese el código que desea modificar: "))
-        nuevoCodigo = int(input("Ingrese el nuevo código: "))
-        modificar_nodo(arbol, codigo, nuevoCodigo)
-        mostrar_arbol(arbol)
+            print("El sistema sólo trabaja con inputs numericos positivos")
     elif operacion == 4:
         print("En qué orden desea visualizar el sistema?")
         print("1. Preorden / 2. Inorden / 3. Postorden")
-        opcion = int(input("Ingrese el número de la opción: "))
-        if opcion == 1:
-            print(f"Recorrido en preorden: {recorrer_preorden(arbol)}")
-        elif opcion == 2:
-            print(f"Recorrido Inorden: {recorrer_inorden(arbol)}")
-        elif opcion == 3:
-            print(f"Recorrido Postorden: {recorrer_postorden(arbol)}")
+        valor = input("Ingrese el número de la opción: ")
+        if valor.isdigit():
+            opcion = int(valor)
+            if opcion == 1:
+                print(f"Recorrido en preorden: {recorrer_preorden(arbol)}")
+            elif opcion == 2:
+                print(f"Recorrido Inorden: {recorrer_inorden(arbol)}")
+            elif opcion == 3:
+                print(f"Recorrido Postorden: {recorrer_postorden(arbol)}")
         else:
-            print("Opción incorrecta")
+            print("Opción incorrecta. El sistema sólo trabaja con inputs numericos positivos")
     else:
         print("Ha cerrado el sistema")
     
@@ -170,4 +186,6 @@ while operacion != 5 and (operacion > 0 and operacion < 6):
     print("3. Modificar un código")
     print("4. Recorrer el sistema")
     print("5. Salir")
-    operacion = int(input("Ingrese el número de la operación: "))
+    valor = input("Ingrese el número de la operación: ")
+    if valor.isdigit():
+        operacion = int(valor)
