@@ -2,8 +2,7 @@
 Repositorio remoto para la entrega del trabajo práctico integrado de la materia Programación I de la Tecnicatura Universitaria en Programación a Distancia de la Universidad Tecnológica Nacional
 
 Alumnos: 
-Balverdi Nicolás Leonel
-Martinez Juan Pablo
+Balverdi Nicolás Leonel, Martinez Juan Pablo
 
 Comision: 25
 
