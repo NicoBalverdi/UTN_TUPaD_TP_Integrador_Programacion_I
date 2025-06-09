@@ -121,82 +121,82 @@ def recorrer_postorden(arbol):
 
 # Programa principal
 
-print("== Trabajo Práctico Integrador ==")
-print("A continuación debe cargar los códigos de sus productos al sistema")
-arbol = crear_arbol()
-print("Sus códigos han sido cargados correctamente en un árbol de búsqueda binaria")
-mostrar_arbol(arbol)
+print("== Trabajo Práctico Integrador ==") # mensaje incial del codigo que se imprime al comienzo
+print("A continuación debe cargar los códigos de sus productos al sistema") # mensaje al usuario para que ingrese un dato numerico que seria el raiz
+arbol = crear_arbol() # llama a la funcion crear_arbol, ingresa numeros uno por uno
+print("Sus códigos han sido cargados correctamente en un árbol de búsqueda binaria") # mensaje al usuario de que se cargo correctamente el arbol
+mostrar_arbol(arbol) #impre por pantalla el arbol
 
-print("Desea realizar otra operación?")
-print("1. Buscar un código")
+print("Desea realizar otra operación?") # mensaje al usuario para que ingrese una operacion (1, 2, 3 , 4 , 5)
+print("1. Buscar un código") 
 print("2. Insertar un código")
 print("3. Modificar un código")
 print("4. Recorrer el sistema")
 print("5. Salir")
 
-valor = input("Ingrese el número de la operación: ")
-while not valor.isdigit():
-    print("El sistema sólo permite inputs numéricos positivos.")
+valor = input("Ingrese el número de la operación: ") # validacion del input, se le pide al usuario numeros del 1 al 5
+while not valor.isdigit(): # validación del input si el contenido de la cadena es digito, si lo es posteriormente se convierte a entero
+    print("El sistema sólo permite inputs numéricos positivos.") 
     valor = input("Ingrese el número de la operación: ")
 
-operacion = int(valor)
+operacion = int(valor) # convierte el input str a entero para poder trabajar con el
 
-while operacion != 5 and (operacion > 0 and operacion < 6):
-    if operacion == 1:
-        valor = input("Indique el código que esta buscando: ")
-        if valor.isdigit():
+while operacion != 5 and (operacion > 0 and operacion < 6): # se crea un while para que el usuario pueda realizar operaciones hasta que ingrese 5 para salir del sistema
+    if operacion == 1: # si el usuario ingresa 1
+        valor = input("Indique el código que esta buscando: ") #ingresa el codigo para buscar
+        if valor.isdigit(): # validación del input si el contenido de la cadena es digito, si lo es posteriormente se convierte a entero
             codigo = int(valor)
-            ruta = encontrar_ruta(arbol, codigo)
-            mostar_ruta(ruta)
+            ruta = encontrar_ruta(arbol, codigo) # obtiene la ruta desde la raiz hasta el valor ingresado
+            mostar_ruta(ruta)  # imprime la ruta
             print()
         else:
             print("El sistema sólo trabaja con inputs numéricos positivos")
-    elif operacion == 2:
+    elif operacion == 2: #si se ingresa 2, se inserta un nuevo valor
         valor = input("Indique el código: ")
-        if valor.isdigit():
-            codigo = int(valor)
+        if valor.isdigit(): # validación del input si el contenido de la cadena es digito, si lo es posteriormente se convierte a entero
+            codigo = int(valor) 
             if codigo > 0:
-                insertar(arbol, codigo)
+                insertar(arbol, codigo) # se inserta usando la funcion insertar
                 mostrar_arbol(arbol)
         else:
             print("El sistema sólo trabaja con inputs numéricos positivos")
-    elif operacion == 3:
+    elif operacion == 3: #si ingresa 3
         valor = input("Ingrese el código que desea modificar: ")
         valor2 = input("Ingrese el nuevo código: ")
-        if valor.isdigit() and valor2.isdigit():
-            codigo = int(valor)
-            nuevoCodigo = int(valor2)
-            modificar_nodo(arbol, codigo, nuevoCodigo)
-            mostrar_arbol(arbol)
+        if valor.isdigit() and valor2.isdigit(): # validación del input si el contenido de la cadena es digito, si lo es posteriormente se convierte a entero
+            codigo = int(valor) 
+            nuevoCodigo = int(valor2) 
+            modificar_nodo(arbol, codigo, nuevoCodigo) # se modifica el nodo usando la funcion modificar_nodo
+            mostrar_arbol(arbol) # se muestra el arbol nuevo
         else:
             print("El sistema sólo trabaja con inputs numéricos positivos")
-    elif operacion == 4:
+    elif operacion == 4: # si ingresa 4
         print("En qué orden desea visualizar el sistema?")
         print("1. Preorden / 2. Inorden / 3. Postorden")
         valor = input("Ingrese el número de la opción: ")
-        if valor.isdigit():
+        if valor.isdigit(): # validación del input si el contenido de la cadena es digito, si lo es posteriormente se convierte a entero
             opcion = int(valor)
-            if opcion == 1:
-                print(f"Recorrido en preorden: {recorrer_preorden(arbol)}")
-            elif opcion == 2:
-                print(f"Recorrido Inorden: {recorrer_inorden(arbol)}")
-            elif opcion == 3:
-                print(f"Recorrido Postorden: {recorrer_postorden(arbol)}")
+            if opcion == 1: # si ingresa 1
+                print(f"Recorrido en preorden: {recorrer_preorden(arbol)}") # se recorre el arbol en preorden
+            elif opcion == 2: # si ingresa 2
+                print(f"Recorrido Inorden: {recorrer_inorden(arbol)}") # se recorre el arbol en inorden
+            elif opcion == 3: # si ingresa 3
+                print(f"Recorrido Postorden: {recorrer_postorden(arbol)}") # se recorre el arbol en postorden
         else:
-            print("Opción incorrecta. El sistema sólo trabaja con inputs numéricos positivos")
+            print("Opción incorrecta. El sistema sólo trabaja con inputs numéricos positivos") #cualquier otro valor no es valido
     else:
-        print("Ha cerrado el sistema")
+        print("Ha cerrado el sistema") # si ingresa 5, finaliza el programa
     
-    print("Desea realizar otra operación?")
+    print("Desea realizar otra operación?") # se vuelve a pedir al usuario que ingrese un numero (1 - 5)
     print("1. Buscar un código")
     print("2. Insertar un código")
     print("3. Modificar un código")
     print("4. Recorrer el sistema")
     print("5. Salir")
     
-    valor = input("Ingrese el número de la operación: ")
-    while not valor.isdigit():
-        print("El sistema sólo permite inputs numéricos positivos.")
-        valor = input("Ingrese el número de la operación: ")
+    valor = input("Ingrese el número de la operación: ") # input del usuario
+    while not valor.isdigit(): # validación del input si el contenido de la cadena es digito, si lo es posteriormente se convierte a entero
+        print("El sistema sólo permite inputs numéricos positivos.") # se informa al usuario que el input debe ser un numero
+        valor = input("Ingrese el número de la operación: ") # se vuelve a pedir el input al usuario
 
-    operacion = int(valor)
+    operacion = int(valor) # se convierte el input a entero para su posterior uso
