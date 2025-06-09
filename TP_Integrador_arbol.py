@@ -113,3 +113,61 @@ def recorrer_postorden(arbol):
     if arbol == []:
         return []
     return recorrer_postorden(arbol[1]) + recorrer_postorden(arbol[2]) + [arbol[0]]
+
+# Programa principal
+
+print("== Trabajo Práctico Integrador ==")
+print("A continuación debe cargar los códigos de sus productos al sistema")
+arbol = crear_arbol()
+print("Sus códigos han sido cargados correctamente en un árbol de busqueda binaria")
+mostrar_arbol(arbol)
+
+print("Desea realizar otra operación?")
+print("1. Buscar un código")
+print("2. Insertar un código")
+print("3. Modificar un código")
+print("4. Recorrer el sistema")
+print("5. Salir")
+
+operacion = int(input("Ingrese el número de la operación: "))
+
+while operacion != 5 and (operacion > 0 and operacion < 6):
+    if operacion == 1:
+        codigo = int(input("Indique el código que esta buscando: "))
+        ruta = encontrar_ruta(arbol, codigo)
+        mostar_ruta(ruta)
+        print()
+    elif operacion == 2:
+        codigo = int(input("Indique el código: "))
+        if codigo > 0:
+            insertar(arbol, codigo)
+            mostrar_arbol(arbol)
+        else:
+            print("No se permiten códigos negativos.")
+    elif operacion == 3:
+        codigo = int(input("Ingrese el código que desea modificar: "))
+        nuevoCodigo = int(input("Ingrese el nuevo código: "))
+        modificar_nodo(arbol, codigo, nuevoCodigo)
+        mostrar_arbol(arbol)
+    elif operacion == 4:
+        print("En qué orden desea visualizar el sistema?")
+        print("1. Preorden / 2. Inorden / 3. Postorden")
+        opcion = int(input("Ingrese el número de la opción: "))
+        if opcion == 1:
+            print(f"Recorrido en preorden: {recorrer_preorden(arbol)}")
+        elif opcion == 2:
+            print(f"Recorrido Inorden: {recorrer_inorden(arbol)}")
+        elif opcion == 3:
+            print(f"Recorrido Postorden: {recorrer_postorden(arbol)}")
+        else:
+            print("Opción incorrecta")
+    else:
+        print("Ha cerrado el sistema")
+    
+    print("Desea realizar otra operación?")
+    print("1. Buscar un código")
+    print("2. Insertar un código")
+    print("3. Modificar un código")
+    print("4. Recorrer el sistema")
+    print("5. Salir")
+    operacion = int(input("Ingrese el número de la operación: "))
